@@ -12,11 +12,11 @@ This project is to convert the database from website http://www.calsql.com/2015/
 # Installation
 
 1. Open the SQL Editor preferred
-2. Run [northwind-structure.sql](Derby\northwind-structure.sql)
-3. Run [northwind-insert.sql](Derby\northwind-insert.sql)
-4. To run procedures [northwind-procedures](Derby\northwind-procedures.sql)
+2. Run [northwind-structure.sql](/Derby/northwind-structure.sql)
+3. Run [northwind-insert.sql](/Derby/northwind-insert.sql)
+4. To run procedures [northwind-procedures](/Derby/northwind-procedures.sql)
 5. To edit procedures, open the Eclipse and select as workspace the root this repository.
-6. [To view the file sql of northwind orignal click here](SQLServer\northwind-original.sql).
+6. [To view the file sql of northwind orignal click here](/SQLServer/northwind-original.sql).
 
 # Bug or sugestions
 
@@ -24,4 +24,4 @@ Open an issue or send email to [clebermatheus@outlook.com](mailto:clebermatheus@
 
 # Other Languages
 
-- [Português do Brasil](Langs\readme-pt-br.md)
+- [Português do Brasil](/Langs/readme-pt-br.md)
