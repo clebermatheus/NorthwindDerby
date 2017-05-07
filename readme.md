@@ -5,7 +5,7 @@ This project is to convert the database from website http://www.calsql.com/2015/
 # Requirements
 
 - [Derby 10.13.1.1 or higher](http://db.apache.org/derby/derby_downloads.html)
-- SQL Editor for your preference
+- SQL Editor from your preference
 - [Eclipse Luna or newer](http://www.eclipse.org/downloads/)
 - Java 8 or higher
 
