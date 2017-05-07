@@ -1,11 +1,11 @@
-# Exercícios Nrthwind em Derby SQL
+# Exercícios Northwind em Derby SQL
 
 Este projeto consiste em converter o banco de dados do website http://www.calsql.com/2015/09/northwind-database-practice-queries.html para Derby SQL e resolver os exercícios apresentados como procedures.
 
 # Requirimentos
 
 - [Derby 10.13.1.1 ou superior](http://db.apache.org/derby/derby_downloads.html)
-- SQL Editor for your preference
+- SQL Editor de sua preferência
 - [Eclipse Luna ou mais recente](http://www.eclipse.org/downloads/)
 - Java 8 ou superior
 
