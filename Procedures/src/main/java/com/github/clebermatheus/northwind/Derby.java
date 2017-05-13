@@ -17,11 +17,11 @@ public class Derby {
 		Connection connection = DriverManager
 				.getConnection("jdbc:default:connection");
 
-		String sql = "SELECT O.* FROM Orders O ";
+		String sql = "SELECT DISTINCT O.* FROM Orders O ";
 		sql += "INNER JOIN OrderDetails OD ON OD.OrderID = O.OrderID ";
 		sql += "INNER JOIN Products P ON P.ProductID = OD.ProductID ";
 		sql += "INNER JOIN Categories C ON C.CategoryID = P.CategoryID ";
-		sql += "WHERE (C.CategoryName = ? )";
+		sql += "WHERE (C.CategoryName = ? AND O.shippedDate IS NOT NULL)";
 		PreparedStatement ps1 = connection.prepareStatement(sql);
 		ps1.setString(1, categoryName);
 		data[0] = ps1.executeQuery();
@@ -37,7 +37,8 @@ public class Derby {
 		String sql = "SELECT P.ProductName, count(O.OrderID) OrdensProcessadas FROM Orders O ";
 		sql += "INNER JOIN OrderDetails OD ON OD.OrderID = O.OrderID ";
 		sql += "INNER JOIN Products P ON P.ProductID = OD.ProductID ";
-		sql += "GROUP BY P.ProductName";
+		sql += "WHERE (O.shippedDate IS NOT NULL) ";
+		sql += "GROUP BY O.OrderID";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		data[0] = ps.executeQuery();
 
@@ -115,7 +116,7 @@ public class Derby {
 		sql += "INNER JOIN Orders O ON O.EmployeeID = E.EmployeeID ";
 		sql += "INNER JOIN OrderDetails OD ON OD.OrderID = O.OrderID ";
 		sql += "INNER JOIN Products P ON P.ProductID = OD.ProductID ";
-		sql += "WHERE P.ProductName = ? ";
+		sql += "WHERE P.ProductName = ? AND O.ShippedDate IS NOT NULL ";
 		sql += "ORDER BY E.EmployeeID ASC";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.setString(1, "Chai");
@@ -131,7 +132,7 @@ public class Derby {
 
 		String sql = "select E.EmployeeID, E.FirstName, E.LastName, count(O.OrderID) QTD_ORDERS from Employees E ";
 		sql += "INNER JOIN Orders O ON O.EmployeeID = E.EmployeeID ";
-		sql += "WHERE month(O.OrderDate) = ? ";
+		sql += "WHERE month(O.OrderDate) = ? AND O.ShippedDate IS NOT NULL ";
 		sql += "GROUP BY E.EmployeeID, E.FirstName, E.LastName ";
 		sql += "ORDER BY count(O.OrderID) DESC";
 		PreparedStatement ps = connection.prepareStatement(sql);
@@ -148,6 +149,7 @@ public class Derby {
 
 		String sql = "select distinct E.EmployeeID, E.FirstName, E.LastName, O.ShipCity from Employees E ";
 		sql += "INNER JOIN Orders O ON O.EmployeeID = E.EmployeeID AND E.City = O.ShipCity ";
+		sql += "WHERE O.ShippedDate IS NOT NULL ";
 		sql += "ORDER BY E.EmployeeID ASC";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		data[0] = ps.executeQuery();
@@ -162,6 +164,7 @@ public class Derby {
 
 		String sql = "select distinct E.EmployeeID, E.FirstName, E.LastName, O.ShipCity from Employees E ";
 		sql += "INNER JOIN Orders O ON O.EmployeeID = E.EmployeeID AND E.City <> O.ShipCity ";
+		sql += "WHERE O.ShippedDate IS NOT NULL ";
 		sql += "ORDER BY E.EmployeeID ASC";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		data[0] = ps.executeQuery();
@@ -179,7 +182,7 @@ public class Derby {
 		sql += "INNER JOIN OrderDetails OD ON O.OrderID = OD.OrderID ";
 		sql += "INNER JOIN Products P ON P.ProductID = OD.ProductID ";
 		sql += "INNER JOIN Categories C ON C.CategoryID = P.CategoryID ";
-		sql += "WHERE C.CategoryName = ? ";
+		sql += "WHERE C.CategoryName = ? AND O.ShippedDate IS NOT NULL ";
 		sql += "ORDER BY S.ShipperID ASC";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.setString(1, "Seafood");
@@ -198,7 +201,7 @@ public class Derby {
 		sql += "INNER JOIN OrderDetails OD ON OD.ProductID = P.ProductID ";
 		sql += "INNER JOIN Orders O ON O.OrderID = OD.OrderID ";
 		sql += "INNER JOIN Employees E ON E.EmployeeID = O.EmployeeID AND E.Country = O.ShipCountry ";
-		sql += "WHERE E.Country = ? ";
+		sql += "WHERE E.Country = ? AND O.ShippedDate IS NOT NULL ";
 		sql += "GROUP BY C.CategoryID, C.CategoryName ";
 		sql += "ORDER BY count(O.OrderID) DESC";
 		PreparedStatement ps = connection.prepareStatement(sql);
