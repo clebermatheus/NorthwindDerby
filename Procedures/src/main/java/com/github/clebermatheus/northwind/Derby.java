@@ -52,7 +52,8 @@ public class Derby {
 		String sql = "select distinct P.ProductID, P.ProductName, month(O.OrderDate) Meses_Sem_Order, year(O.OrderDate) Anos_Sem_Order from Products P ";
 		sql += "INNER JOIN OrderDetails OD ON P.ProductID = OD.ProductID ";
 		sql += "INNER JOIN Orders O ON O.OrderID = OD.OrderID ";
-		sql += "WHERE (month(O.OrderDate) <> 1 or month(O.OrderDate) <> 2 or month(O.OrderDate) <> 3 or month(O.OrderDate) <> 4 or month(O.OrderDate) <> 5 or month(O.OrderDate) <> 6 or month(O.OrderDate) <> 7 or month(O.OrderDate) <> 8 or month(O.OrderDate) <> 9 or month(O.OrderDate) <> 10 or month(O.OrderDate) <> 11 or month(O.OrderDate) <> 12) ";
+		//sql += "WHERE (month(O.OrderDate) <> 1 or month(O.OrderDate) <> 2 or month(O.OrderDate) <> 3 or month(O.OrderDate) <> 4 or month(O.OrderDate) <> 5 or month(O.OrderDate) <> 6 or month(O.OrderDate) <> 7 or month(O.OrderDate) <> 8 or month(O.OrderDate) <> 9 or month(O.OrderDate) <> 10 or month(O.OrderDate) <> 11 or month(O.OrderDate) <> 12) ";
+		sql += "WHERE (O.shippedDate is not null) ";
 		sql += "ORDER BY 1,2, 4";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		data[0] = ps.executeQuery();
@@ -82,7 +83,8 @@ public class Derby {
 		String sql = "select distinct P.ProductID, P.ProductName, month(O.OrderDate) Meses_Sem_Order, year(O.OrderDate) Anos_Sem_Order from Products P ";
 		sql += "INNER JOIN OrderDetails OD ON P.ProductID = OD.ProductID ";
 		sql += "INNER JOIN Orders O ON O.OrderID = OD.OrderID ";
-		sql += "WHERE (month(O.OrderDate) <> 1 or month(O.OrderDate) <> 2 or month(O.OrderDate) <> 3 or month(O.OrderDate) <> 4 or month(O.OrderDate) <> 5 or month(O.OrderDate) <> 6 or month(O.OrderDate) <> 7 or month(O.OrderDate) <> 8 or month(O.OrderDate) <> 9 or month(O.OrderDate) <> 10 or month(O.OrderDate) <> 11 or month(O.OrderDate) <> 12) ";
+		//sql += "WHERE (month(O.OrderDate) <> 1 or month(O.OrderDate) <> 2 or month(O.OrderDate) <> 3 or month(O.OrderDate) <> 4 or month(O.OrderDate) <> 5 or month(O.OrderDate) <> 6 or month(O.OrderDate) <> 7 or month(O.OrderDate) <> 8 or month(O.OrderDate) <> 9 or month(O.OrderDate) <> 10 or month(O.OrderDate) <> 11 or month(O.OrderDate) <> 12) ";
+		sql += " WHERE (O.shippedDate IS NOT NULL) ";
 		sql += " AND (P.ProductName = ? )";
 		sql += "ORDER BY P.ProductID, P.ProductName, year(O.OrderDate)";
 		PreparedStatement ps = connection.prepareStatement(sql);
